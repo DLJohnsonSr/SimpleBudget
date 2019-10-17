@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/save-category}" th:object="${category}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <label for="name">Category Name</label>
+        <input id="name" type="text" th:field="*{name}">
+        <input id="incomeExpenseTransfer1" type="radio" name="incomeExpense" th:field="*{incomeExpense}" value="income">
+        <label for="incomeExpenseTransfer1">Income</label>
+        <input id="incomeExpenseTransfer2" type="radio" name="incomeExpense" th:field="*{incomeExpense}" value="expense">
+        <label for="incomeExpenseTransfer2">Expense</label>
+        <label for="budget">Budget</label>
+        <select id="budget" th:field="*{budget}">
+            <option th:value="${budget.id}"></option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

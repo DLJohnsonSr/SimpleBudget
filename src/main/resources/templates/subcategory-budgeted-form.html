@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+	<form th:action="@{/update-subcategory-budgeted/{subId}(subId = ${subcategoryId})}" method="post">
+		<label for="amount">Amount</label>
+		<input id="amount" type="number" name="amount" value="0">
+		<input type="submit" value="Update">
+	</form>
+
+</body>
+</html>

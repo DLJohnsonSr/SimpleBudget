@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/save-budget}" th:object="${budget}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <label for="year">Year</label>
+        <input id="year" type="text" th:field="*{year}">
+        <label for="month">Month</label>
+        <input id="month" type="text" th:field="*{month}">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

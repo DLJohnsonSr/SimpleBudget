@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 th:text="${budget.month} +' / ' + ${budget.year}"></h1>
+    <h3>Budgeted</h3>
+    <span th:text="'Income: ' + ${budget.budgetedIncome}"></span>
+    <span th:text="'Expenses: ' + ${budget.budgetedExpense}"></span>
+    <span th:text="'Budgeted Remaining: ' + ${budget.budgetedRemaining}"></span>
+    <h3>Actual</h3>
+    <span th:text="'Income: '  + ${budget.actualIncome}"></span>
+    <span th:text="'Expenses: ' + ${budget.actualExpense}"></span>
+    <span th:text="'Actual Remaining: ' + ${budget.actualRemaining}"></span>
+    <h3>Total Remaining</h3>
+    <span th:text="'Total Remaining Income: ' + ${budget.totalIncomeRemaining}"></span>
+    <span th:text="'Total Remaining Expenses: ' + ${budget.totalExpenseRemaining}"></span>
+    <br>
+    <a th:href="@{/add-category/{budId}(budId = ${budget.id})}">Add Category</a>
+    <br>
+    <br>
+    <h2>Income</h2>
+    <div th:each="category, stat : ${budget.categorySet}" th:if="${category.incomeExpense} == 'income'">
+<!--        CATEGORY-->
+        <h3 th:text="${category.name}"></h3>
+	    <div th:if="${#sets.isEmpty(category.subcategorySet)}">
+		    <a th:href="@{/edit-category-budgeted/{catId}(catId = ${category.id})}"><span th:text="'Budgeted: ' + ${category.budgeted}"></span></a>
+		    <a th:href="@{/edit-category-actual/{catId}(catId = ${category.id})}"><span th:text="'Actual: ' + ${category.actual}"></span></a>
+		    <span th:text="'Remaining: ' + ${category.remaining}"></span>
+	    </div>
+	    <div th:unless="${#sets.isEmpty(category.subcategorySet)}">
+		    <span th:text="'Budgeted: ' + ${category.budgeted}"></span>
+		    <span th:text="'Actual: ' + ${category.actual}"></span>
+		    <span th:text="'Remaining: ' + ${category.remaining}"></span>
+	    </div>
+        <div>
+            <a th:href="@{/edit-category/{catId}(catId = ${category.id})}">Edit Category</a>
+            <a th:href="@{/delete-category/{catId}(catId = ${category.id})}">Delete Category</a>
+            <a th:href="@{/add-subcategory/{catId}(catId = ${category.id})}">Add Subcategory</a>
+        </div>
+
+        <!--            SUBCATEGORY-->
+        <div th:each="subcategory : ${category.subcategorySet}">
+            <h4 th:text="${subcategory.name}"></h4>
+            <div>
+                <a th:href="@{/edit-subcategory-budgeted/{subId}(subId = ${subcategory.id})}"><span th:text="'Budgeted: ' + ${subcategory.budgeted}"></span></a>
+                <a th:href="@{/edit-subcategory-actual/{subId}(subId = ${subcategory.id})}"><span th:text="'Actual: ' + ${subcategory.actual}"></span></a>
+                <span th:text="'Remaining: ' + ${subcategory.remaining}"></span>
+            </div>
+            <div>
+                <a th:href="@{/edit-subcategory/{subId}(subId = ${subcategory.id})}">Edit Subcategory</a>
+                <a th:href="@{/delete-subcategory/{subId}(subId = ${subcategory.id})}">Delete Subcategory</a>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <h2>Expenses</h2>
+    <div th:each="category, stat : ${budget.categorySet}" th:if="${category.incomeExpense} == 'expense'">
+
+<!--        CATEGORY-->
+        <h3 th:text="${category.name}"></h3>
+	    <div th:if="${#sets.isEmpty(category.subcategorySet)}">
+		    <a th:href="@{/edit-category-budgeted/{catId}(catId = ${category.id})}"><span th:text="'Budgeted: ' + ${category.budgeted}"></span></a>
+		    <a th:href="@{/edit-category-actual/{catId}(catId = ${category.id})}"><span th:text="'Actual: ' + ${category.actual}"></span></a>
+		    <span th:text="'Remaining: ' + ${category.remaining}"></span>
+	    </div>
+	    <div th:unless="${#sets.isEmpty(category.subcategorySet)}">
+		    <span th:text="'Budgeted: ' + ${category.budgeted}"></span>
+		    <span th:text="'Actual: ' + ${category.actual}"></span>
+		    <span th:text="'Remaining: ' + ${category.remaining}"></span>
+	    </div>
+        <div>
+	        <a th:href="@{/edit-category/{catId}(catId = ${category.id})}">Edit Category</a>
+            <a th:href="@{/delete-category/{catId}(catId = ${category.id})}">Delete Category</a>
+            <a th:href="@{/add-subcategory/{catId}(catId = ${category.id})}">Add Subcategory</a>
+        </div>
+
+        <!--            SUBCATEGORY-->
+        <div th:each="subcategory : ${category.subcategorySet}">
+            <h4 th:text="${subcategory.name}"></h4>
+            <div>
+                <a th:href="@{/edit-subcategory-budgeted/{subId}(subId = ${subcategory.id})}"><span th:text="'Budgeted: ' + ${subcategory.budgeted}"></span></a>
+                <a th:href="@{/edit-subcategory-actual/{subId}(subId = ${subcategory.id})}"><span th:text="'Actual: ' + ${subcategory.actual}"></span></a>
+                <span th:text="'Remaining: ' + ${subcategory.remaining}"></span>
+            </div>
+            <div>
+	            <a th:href="@{/edit-subcategory/{subId}(subId = ${subcategory.id})}">Edit Subcategory</a>
+                <a th:href="@{/delete-subcategory/{subId}(subId = ${subcategory.id})}">Delete Subcategory</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

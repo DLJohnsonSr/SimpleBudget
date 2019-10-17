@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>Home Page</h1>
+    <span><a href="/add-budget">Create New Budget</a></span>
+    <h2>Budgets</h2>
+    <div th:each="budget : ${budgets}">
+        <a th:href="@{/view-budget/{budId}(budId = ${budget.id})}"><span th:text="${budget.year}+' '+${budget.month}"></span></a>
+        <a th:href="@{/edit-budget/{budId}(budId = ${budget.id})}">Edit Budget</a>
+        <a th:href="@{/delete-budget/{budId}(budId = ${budget.id})}">Delete Budget</a>
+    </div>
+
+</body>
+</html>
